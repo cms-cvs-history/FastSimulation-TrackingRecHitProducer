@@ -1,0 +1,106 @@
+module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConverter {
+    # CMSSW
+    #vstring ROUList = { "TrackerHitsPixelBarrelLowTof","TrackerHitsPixelBarrelHighTof",
+    #	"TrackerHitsPixelEndcapLowTof","TrackerHitsPixelEndcapHighTof",
+    #	"TrackerHitsTIBLowTof","TrackerHitsTIBHighTof","TrackerHitsTIDLowTof","TrackerHitsTIDHighTof",
+    #	"TrackerHitsTOBLowTof","TrackerHitsTOBHighTof","TrackerHitsTECLowTof","TrackerHitsTECHighTof",
+    #   "TrackerHitsPixelBarrelLowTof","TrackerHitsPixelBarrelHighTof",
+    #   "TrackerHitsPixelEndcapLowTof","TrackerHitsPixelEndcapHighTof" } 	
+	
+    # FAMOS
+    vstring ROUList = {"TrackerHits"}
+    #
+    
+    #
+    string RecHits  = "stripRecHits"
+    untracked double DeltaRaysMomentumCut = 0.5 # the default is 0.5 GeV/c
+    untracked int32  VerboseLevel = 2
+    // If you want to have RecHits == PSimHits (tracking with PSimHits)
+    untracked bool trackingPSimHits = false # the default is false
+    // Needed to compute Pixel Errors
+    string PixelErrorParametrization = "NOTcmsim"
+    // Pixel
+    # untracked string PixelMultiplicityFile      = "FastSimulation/TrackingRecHitProducer/data/PixelData.root"
+    # untracked string PixelBarrelResolutionFile  = "FastSimulation/TrackingRecHitProducer/data/PixelBarrelResolution.root"
+    # untracked string PixelForwardResolutionFile = "FastSimulation/TrackingRecHitProducer/data/PixelForwardResolution.root"
+    # untracked int32  AlphaBarrelMultiplicity    = 4
+    # untracked int32  BetaBarrelMultiplicity     = 6
+    # untracked int32  AlphaForwardMultiplicity   = 6
+    # untracked int32  BetaForwardMultiplicity    = 3
+    # untracked double AlphaBarrel_BinMin   = -0.2
+    # untracked double AlphaBarrel_BinWidth =  0.1
+    # untracked double BetaBarrel_BinMin    =  0.0
+    # untracked double BetaBarrel_BinWidth  =  0.2
+    // TIB
+    #    untracked double TIB1x = 0.00195
+    #    untracked double TIB1y = 11.7/sqrt(12.)
+    #    untracked double TIB2x = 0.00191
+    #    untracked double TIB2y = 11.7/sqrt(12.)
+    #    untracked double TIB3x = 0.00325
+    #    untracked double TIB3y = 11.7/sqrt(12.)
+    #    untracked double TIB4x = 0.00323
+    #    untracked double TIB4y = 11.7/sqrt(12.)
+    //
+    // TID
+    #    untracked double TID1x = 0.00262
+    #    untracked double TID1y = 12.7/sqrt(12.)
+    #    untracked double TID2x = 0.00354
+    #    untracked double TID2y = 12.7/sqrt(12.)
+    #    untracked double TID3x = 0.00391
+    #    untracked double TID3y = 11.9/sqrt(12.)
+    //
+    // TOB
+    #    untracked double TOB1x = 0.00461
+    #    untracked double TOB1y = 2*9.1514/sqrt(12.)
+    #    untracked double TOB2x = 0.00458
+    #    untracked double TOB2y = 2*9.1514/sqrt(12.)
+    #    untracked double TOB3x = 0.00488
+    #    untracked double TOB3y = 2*9.1514/sqrt(12.)
+    #    untracked double TOB4x = 0.00491
+    #    untracked double TOB4y = 2*9.1514/sqrt(12.)
+    #    untracked double TOB5x = 0.00293
+    #    untracked double TOB5y = 2*9.1514/sqrt(12.)
+    #    untracked double TOB6x = 0.00299
+    #    untracked double TOB6y = 2*9.1514/sqrt(12.)
+    //
+    // TEC
+    #    untracked double TEC1x = 0.00262
+    #    untracked double TEC1y = 12.7/sqrt(12.)
+    #    untracked double TEC2x = 0.00354
+    #    untracked double TEC2y = 12.7/sqrt(12.)
+    #    untracked double TEC3x = 0.00391
+    #    untracked double TEC3y = 11.9/sqrt(12.)
+    #    untracked double TEC4x = 0.00346
+    #    untracked double TEC4y = 12.1/sqrt(12.)
+    #    untracked double TEC5x = 0.00378
+    #    untracked double TEC5y = 2*12.3/sqrt(12.)
+    #    untracked double TEC6x = 0.00508
+    #    untracked double TEC6y = 2*11.9/sqrt(12.)
+    #    untracked double TEC7x = 0.00422
+    #    untracked double TEC7y = 2*12.1/sqrt(12.)
+    //
+    // Hit Finding Probabilities
+    # untracked double HitFindingProbability_PXB  = 0.75
+    # untracked double HitFindingProbability_PXF  = 0.75
+    # untracked double HitFindingProbability_TIB1 = 0.75
+    # untracked double HitFindingProbability_TIB2 = 0.75
+    # untracked double HitFindingProbability_TIB3 = 0.75
+    # untracked double HitFindingProbability_TIB4 = 0.75
+    # untracked double HitFindingProbability_TID1 = 0.75
+    # untracked double HitFindingProbability_TID2 = 0.75
+    # untracked double HitFindingProbability_TID3 = 0.75
+    # untracked double HitFindingProbability_TOB1 = 0.75
+    # untracked double HitFindingProbability_TOB2 = 0.75
+    # untracked double HitFindingProbability_TOB3 = 0.75
+    # untracked double HitFindingProbability_TOB4 = 0.75
+    # untracked double HitFindingProbability_TOB5 = 0.75
+    # untracked double HitFindingProbability_TOB6 = 0.75
+    # untracked double HitFindingProbability_TEC1 = 0.75
+    # untracked double HitFindingProbability_TEC2 = 0.75
+    # untracked double HitFindingProbability_TEC3 = 0.75
+    # untracked double HitFindingProbability_TEC4 = 0.75
+    # untracked double HitFindingProbability_TEC5 = 0.75
+    # untracked double HitFindingProbability_TEC6 = 0.75
+    # untracked double HitFindingProbability_TEC7 = 0.75
+    //
+}

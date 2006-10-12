@@ -1,0 +1,26 @@
+<use name=FWCore/Framework>
+<use name=FWCore/ParameterSet>
+<use name=FWCore/Utilities>
+<use name=DataFormats/Common>
+<use name=DataFormats/TrackReco>
+<use name=DataFormats/Math>
+<use name=DataFormats/SiStripDetId> 
+<use name=DataFormats/SiPixelDetId> 
+<use name=Foundation/PluginManager>
+<use name=Geometry/TrackerGeometryBuilder>
+<use name=Geometry/Records>
+<use name=RecoLocalTracker/SiPixelRecHits>
+<use name=TrackingTools/TrackFitters>
+<use name=TrackingTools/TransientTrack>
+<use name=SimDataFormats/TrackingHit>
+<use name=SimTracker/TrackerHitAssociation>
+<use name=SimDataFormats/TrackerDigiSimLink>
+<use name=FastSimulation/TrackingRecHitProducer>
+<use name=clhep>
+<use name=rootcintex>
+<use name=root>
+
+<library file=FamosRecHitAnalysis.cc name=FamosRecHitAnalysis>
+  <use name=FWCore/Framework>
+  <flags SEAL_PLUGIN_NAME="FamosRecHitAnalysis">
+</library>
