@@ -12,7 +12,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     #
     
     #
-    string RecHits  = "stripRecHits"
+    string RecHits  = "trackerRecHits"
     untracked double DeltaRaysMomentumCut = 0.5 # the default is 0.5 GeV/c
     untracked int32  VerboseLevel = 2
     // If you want to have RecHits == PSimHits (tracking with PSimHits)
@@ -27,10 +27,18 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     # untracked int32  BetaBarrelMultiplicity     = 6
     # untracked int32  AlphaForwardMultiplicity   = 6
     # untracked int32  BetaForwardMultiplicity    = 3
-    # untracked double AlphaBarrel_BinMin   = -0.2
-    # untracked double AlphaBarrel_BinWidth =  0.1
-    # untracked double BetaBarrel_BinMin    =  0.0
-    # untracked double BetaBarrel_BinWidth  =  0.2
+    # untracked double AlphaBarrel_BinMin    = -0.2
+    # untracked double AlphaBarrel_BinWidth  =  0.1
+    # untracked int32  AlphaBarrel_BinN      =  4
+    # untracked double BetaBarrel_BinMin     =  0.0
+    # untracked double BetaBarrel_BinWidth   =  0.2
+    # untracked int32  BetaBarrel_BinN       =  7
+    # untracked double AlphaForward_BinMin   =  0.0
+    # untracked double AlphaForward_BinWidth =  0.0
+    # untracked int32  AlphaForward_BinN     =  0
+    # untracked double BetaForward_BinMin    =  0.0
+    # untracked double BetaForward_BinWidth  =  0.0
+    # untracked int32  BetaForward_BinN      =  0
     // TIB
     #    untracked double TIB1x = 0.00195
     #    untracked double TIB1y = 11.7/sqrt(12.)
