@@ -1,4 +1,5 @@
 module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConverter {
+
     # CMSSW
     #vstring ROUList = { "TrackerHitsPixelBarrelLowTof","TrackerHitsPixelBarrelHighTof",
     #	"TrackerHitsPixelEndcapLowTof","TrackerHitsPixelEndcapHighTof",
