@@ -18,6 +18,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     untracked int32  VerboseLevel = 2
     // If you want to have RecHits == PSimHits (tracking with PSimHits)
     bool trackingPSimHits = false # the default is false
+    bool negativeErrorProtection = false # the default is false
     // Needed to compute Pixel Errors
     string PixelErrorParametrization = "NOTcmsim"
     // Pixel
