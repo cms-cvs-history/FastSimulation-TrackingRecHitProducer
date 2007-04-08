@@ -13,14 +13,16 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     #
     
     #
-    string RecHits  = "trackerRecHits"
+
     double DeltaRaysMomentumCut = 0.5 # the default is 0.5 GeV/c
     untracked int32  VerboseLevel = 2
+
     // If you want to have RecHits == PSimHits (tracking with PSimHits)
     bool trackingPSimHits = false # the default is false
-    bool negativeErrorProtection = false # the default is false
+
     // Needed to compute Pixel Errors
     string PixelErrorParametrization = "NOTcmsim"
+
     // Pixel
     string PixelMultiplicityFile      = "FastSimulation/TrackingRecHitProducer/data/PixelData.root"
     string PixelBarrelResolutionFile  = "FastSimulation/TrackingRecHitProducer/data/PixelBarrelResolution.root"
@@ -41,6 +43,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double BetaForward_BinMin    =  0.0
     double BetaForward_BinWidth  =  0.0
     int32  BetaForward_BinN      =  0
+
     // TIB
     double TIB1x = 0.00195
     double TIB1y = 3.3775 // 11.7/sqrt(12.)
@@ -50,7 +53,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double TIB3y = 3.3775 // 11.7/sqrt(12.)
     double TIB4x = 0.00323
     double TIB4y = 3.3775 // 11.7/sqrt(12.)
-    //
+
     // TID
     double TID1x = 0.00262
     double TID1y = 3.6662 // 12.7/sqrt(12.)
@@ -58,7 +61,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double TID2y = 3.6662 // 12.7/sqrt(12.)
     double TID3x = 0.00391
     double TID3y = 3.4352 // 11.9/sqrt(12.)
-    //
+
     // TOB
     double TOB1x = 0.00461
     double TOB1y = 5.2836 // 2*9.1514/sqrt(12.)
@@ -72,7 +75,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double TOB5y = 5.2836 // 2*9.1514/sqrt(12.)
     double TOB6x = 0.00299
     double TOB6y = 5.2836 // 2*9.1514/sqrt(12.)
-    //
+
     // TEC
     double TEC1x = 0.00262
     double TEC1y = 3.6662 // 12.7/sqrt(12.)
@@ -88,7 +91,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double TEC6y = 6.8704 // 2*11.9/sqrt(12.)
     double TEC7x = 0.00422
     double TEC7y = 6.9859 // 2*12.1/sqrt(12.)
-    //
+
     // Hit Finding Probabilities
     double HitFindingProbability_PXB  = 1.00
     double HitFindingProbability_PXF  = 1.00
