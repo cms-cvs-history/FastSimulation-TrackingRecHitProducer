@@ -22,5 +22,5 @@
 
 <library file=FamosRecHitAnalysis.cc name=FamosRecHitAnalysis>
   <use name=FWCore/Framework>
-  <flags SEAL_PLUGIN_NAME="FamosRecHitAnalysis">
+  <flags EDM_PLUGIN=1>
 </library>
