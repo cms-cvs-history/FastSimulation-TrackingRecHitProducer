@@ -20,6 +20,10 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     // If you want to have RecHits == PSimHits (tracking with PSimHits)
     bool trackingPSimHits = false # the default is false
 
+    // matching of 1dim hits in double-sided modules
+    // creating 2dim hits
+    bool doRecHitMatching = true
+
     // Needed to compute Pixel Errors
     string PixelErrorParametrization = "NOTcmsim"
 
