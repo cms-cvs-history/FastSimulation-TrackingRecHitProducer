@@ -26,6 +26,8 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
 
     // Needed to compute Pixel Errors
     string PixelErrorParametrization = "NOTcmsim"
+    bool UseNewParametrization = true
+    bool UseSigma = true
 
     // Pixel
     string PixelMultiplicityFile      = "FastSimulation/TrackingRecHitProducer/data/PixelData.root"
