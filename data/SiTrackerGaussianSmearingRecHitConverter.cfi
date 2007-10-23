@@ -11,7 +11,9 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     # FAMOS
     vstring ROUList = {"TrackerHits"}
     #
-    
+
+    # Use TRandom instead of the default CLHEP random engine
+    bool UseTRandomEngine = true
     #
 
     double DeltaRaysMomentumCut = 0.5 # the default is 0.5 GeV/c
