@@ -31,6 +31,9 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     bool UseNewParametrization = true
     bool UseSigma = true
 
+    // Switch between old and new parametrization
+    bool UseCMSSWPixelParametrization = false
+
     // Pixel
     string PixelMultiplicityFile      = "FastSimulation/TrackingRecHitProducer/data/PixelData.root"
     string PixelBarrelResolutionFile  = "FastSimulation/TrackingRecHitProducer/data/PixelBarrelResolution.root"
@@ -51,6 +54,28 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double BetaForward_BinMin    =  0.0
     double BetaForward_BinWidth  =  0.0
     int32  BetaForward_BinN      =  0
+
+    // Pixel CMSSW Parametrization
+    string PixelMultiplicityFileNew         = "FastSimulation/TrackingRecHitProducer/data/PixelDataNew.root"
+    string PixelBarrelResolutionFileNew     = "FastSimulation/TrackingRecHitProducer/data/PixelBarrelResolutionNew.root"
+    string PixelForwardResolutionFileNew    = "FastSimulation/TrackingRecHitProducer/data/PixelForwardResolutionNew.root"
+
+    int32  AlphaBarrelMultiplicityNew    = 4
+    int32  BetaBarrelMultiplicityNew     = 6
+    int32  AlphaForwardMultiplicityNew   = 3
+    int32  BetaForwardMultiplicityNew    = 3
+    double AlphaBarrel_BinMinNew    = -0.2
+    double AlphaBarrel_BinWidthNew  =  0.1
+    int32  AlphaBarrel_BinNNew      =  4
+    double BetaBarrel_BinMinNew     =  0.0
+    double BetaBarrel_BinWidthNew   =  0.2
+    int32  BetaBarrel_BinNNew       =  7
+    double AlphaForward_BinMinNew   =  0.0
+    double AlphaForward_BinWidthNew =  0.0
+    int32  AlphaForward_BinNNew     =  0
+    double BetaForward_BinMinNew    =  0.0
+    double BetaForward_BinWidthNew  =  0.0
+    int32  BetaForward_BinNNew      =  0
 
     // TIB
     double TIB1x = 0.00195
