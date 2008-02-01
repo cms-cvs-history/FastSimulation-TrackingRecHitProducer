@@ -23,3 +23,10 @@
   <use name=FWCore/Framework>
   <flags EDM_PLUGIN=1>
 </library>
+
+<library file=SiPixelRecHitsInputDistributionsMaker.cc name=SiPixelRecHitsInputDistributionsMaker>
+  <use name=FWCore/Framework>
+  <use name=DQMServices/CoreROOT>
+  <use name=boost>
+  <flags EDM_PLUGIN=1>
+</library>
