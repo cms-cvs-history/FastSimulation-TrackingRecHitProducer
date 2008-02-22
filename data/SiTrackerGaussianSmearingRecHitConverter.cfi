@@ -32,7 +32,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     bool UseSigma = true
 
     // Switch between old and new parametrization
-    bool UseCMSSWPixelParametrization = false
+    bool UseCMSSWPixelParametrization = true
 
     // Pixel
     string PixelMultiplicityFile      = "FastSimulation/TrackingRecHitProducer/data/PixelData.root"
