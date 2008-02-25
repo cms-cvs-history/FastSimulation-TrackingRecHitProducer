@@ -18,7 +18,19 @@
 <use name=rootcintex>
 <use name=root>
 
-<library file=*.cc name=TrackingRecHitProducerTest>
+<library file=FamosRecHitAnalysis.cc name=FamosRecHitAnalysis> 	 
+  <use name=FWCore/Framework> 
+  <flags EDM_PLUGIN=1> 	 
+</library> 	 
+	  	 
+<library file=SiPixelRecHitsInputDistributionsMaker.cc name=SiPixelRecHitsInputDistributionsMaker>
+  <use name=FWCore/Framework>
+  <use name=DQMServices/CoreROOT>
+  <use name=boost>
+  <flags EDM_PLUGIN=1>
+</library>
+
+<library file=FamosRecHitTest.cc name=FamosRecHitTest>
   <use name=FWCore/Framework>
   <use name=DQMServices/CoreROOT>
   <use name=boost>
