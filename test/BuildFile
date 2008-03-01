@@ -25,14 +25,14 @@
 	  	 
 <library file=SiPixelRecHitsInputDistributionsMaker.cc name=SiPixelRecHitsInputDistributionsMaker>
   <use name=FWCore/Framework>
-  <use name=DQMServices/CoreROOT>
+  <use name=DQMServices/Core>
   <use name=boost>
   <flags EDM_PLUGIN=1>
 </library>
 
 <library file=FamosRecHitTest.cc name=FamosRecHitTest>
   <use name=FWCore/Framework>
-  <use name=DQMServices/CoreROOT>
+  <use name=DQMServices/Core>
   <use name=boost>
   <flags EDM_PLUGIN=1>
 </library>
