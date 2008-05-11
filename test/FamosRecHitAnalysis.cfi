@@ -1,6 +1,6 @@
 module FamosRecHitAnalysis = FamosRecHitAnalysis{ 
        string   RootFileName  = "FamosRecHitAnalysis.root"
-       vstring  SimHitList    = {"TrackerHits"}
+       VInputTag  SimHitList    = {"TrackerHits"}
 
        // Switch between old and new parametrization
        bool UseCMSSWPixelParametrization = true

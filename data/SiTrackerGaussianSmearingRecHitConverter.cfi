@@ -9,7 +9,7 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     #   "TrackerHitsPixelEndcapLowTof","TrackerHitsPixelEndcapHighTof" } 	
 	
     # FAMOS
-    vstring ROUList = {"TrackerHits"}
+    VInputTag ROUList = {"mix:famoSimHitsTrackerHits"}
     #
 
     # Use TRandom instead of the default CLHEP random engine
