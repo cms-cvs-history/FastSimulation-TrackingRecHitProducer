@@ -32,7 +32,7 @@ module FamosRecHitAnalysis = FamosRecHitAnalysis{
        string PixelForwardResolutionFileNew    = "FastSimulation/TrackingRecHitProducer/data/PixelForwardResolutionNew.root"
 
        int32  AlphaBarrelMultiplicityNew    = 4
-       int32  BetaBarrelMultiplicityNew     = 6
+       int32  BetaBarrelMultiplicityNew     = 7
        int32  AlphaForwardMultiplicityNew   = 3
        int32  BetaForwardMultiplicityNew    = 3
        double AlphaBarrel_BinMinNew    = -0.2
