@@ -5,6 +5,9 @@
  * History: Sep 27, 2006 -  initial version
  * --------------------------------------------------------------
  */
+//PAT
+//FastTrackerCluster
+#include "FastSimDataFormats/External/interface/FastTrackerCluster.h"
 
 // SiTracker Gaussian Smearing
 #include "FastSimulation/TrackingRecHitProducer/interface/SiTrackerGaussianSmearingRecHitConverter.h"
@@ -82,9 +85,12 @@ SiTrackerGaussianSmearingRecHitConverter::SiTrackerGaussianSmearingRecHitConvert
   }
 
   random = new RandomEngine(&(*rng));
+  //PAT
+  produces<FastTrackerClusterCollection>("TrackerClusters");
 
   produces<SiTrackerGSRecHit2DCollection>("TrackerGSRecHits");
   produces<SiTrackerGSMatchedRecHit2DCollection>("TrackerGSMatchedRecHits");
+
 
   //--- PSimHit Containers
   trackerContainers.clear();
@@ -551,8 +557,11 @@ void SiTrackerGaussianSmearingRecHitConverter::produce(edm::Event& e, const edm:
   std::auto_ptr<MixCollection<PSimHit> > allTrackerHits(new MixCollection<PSimHit>(cf_simhitvec));
 
   // Step B: create temporary RecHit collection and fill it with Gaussian smeared RecHit's
+
+  //NEW!!!CREATE CLUSTERS AT THE SAME TIME
   std::map<unsigned, edm::OwnVector<SiTrackerGSRecHit2D> > temporaryRecHits;
-  smearHits( *allTrackerHits, temporaryRecHits);
+  std::map<unsigned, edm::OwnVector<FastTrackerCluster> > theClusters ;
+  smearHits( *allTrackerHits, temporaryRecHits, theClusters);
 
  // Step C: match rechits on stereo layers
   std::map<unsigned, edm::OwnVector<SiTrackerGSMatchedRecHit2D> > temporaryMatchedRecHits ;
@@ -572,16 +581,24 @@ void SiTrackerGaussianSmearingRecHitConverter::produce(edm::Event& e, const edm:
   //  std::cout << "TrackerGSRecHits hits are =\t" <<  (*recHitCollection).size()<<std::endl;
   //std::cout << "TrackerGSRecHitsMatched hits are =\t" <<  (*recHitCollectionMatched).size()<< std::endl;
 
+
   // Step E: write output to file
   e.put(recHitCollection,"TrackerGSRecHits");
   e.put(recHitCollectionMatched,"TrackerGSMatchedRecHits");
+
+  //STEP F: write clusters
+  std::auto_ptr<FastTrackerClusterCollection> clusterCollection(new FastTrackerClusterCollection);
+  loadClusters(theClusters, *clusterCollection);
+  e.put(clusterCollection,"TrackerClusters");
+  
 }
 
 
 
 void SiTrackerGaussianSmearingRecHitConverter::smearHits(
 							 MixCollection<PSimHit>& input,
-							 std::map<unsigned, edm::OwnVector<SiTrackerGSRecHit2D> >& temporaryRecHits)
+							 std::map<unsigned, edm::OwnVector<SiTrackerGSRecHit2D> >& temporaryRecHits,
+							 std::map<unsigned, edm::OwnVector<FastTrackerCluster> >& theClusters)
 {
   
   int numberOfPSimHits = 0;
@@ -691,12 +708,23 @@ void SiTrackerGaussianSmearingRecHitConverter::smearHits(
 					 alphaMult, betaMult)
 		 );
       
-       // This a correpondence map between RecHits and SimHits 
+
+      //create cluster 
+      theClusters[trackID].push_back( 
+				       new FastTrackerCluster(position, error, det,
+							    simHitCounter, trackID, 
+							    eeID, 
+							    (*isim).energyLoss())
+				       );	
+      
+      //      std::cout << "CLUSTER for simhit " << simHitCounter <<  "\t energy loss = " << (*isim).energyLoss() << std::endl; 
+      
+      // This a correpondence map between RecHits and SimHits 
       // (for later  use in matchHits)
       correspondingSimHit[recHitCounter++] = isim; 
       
     } // end if(isCreated)
-
+    
   } // end loop on PSimHits
 
 }
@@ -1063,6 +1091,21 @@ bool SiTrackerGaussianSmearingRecHitConverter::gaussianSmearing(const PSimHit& s
   } // subdetector case
     //
 }   
+
+void 
+SiTrackerGaussianSmearingRecHitConverter::loadClusters(
+     std::map<unsigned,edm::OwnVector<FastTrackerCluster> >& theClusterMap, 
+     FastTrackerClusterCollection& theClusterCollection) const
+{
+  std::map<unsigned,edm::OwnVector<FastTrackerCluster> >::const_iterator 
+    it = theClusterMap.begin();
+  std::map<unsigned,edm::OwnVector<FastTrackerCluster> >::const_iterator 
+    lastCluster = theClusterMap.end();
+  
+  for( ; it != lastCluster ; ++it ) { 
+    theClusterCollection.put(it->first,(it->second).begin(),(it->second).end());
+  }
+}
 
 
 void 
