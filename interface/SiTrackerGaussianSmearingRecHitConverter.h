@@ -223,6 +223,10 @@ class SiTrackerGaussianSmearingRecHitConverter : public edm::EDProducer
 
   // The random engine
   const RandomEngine* random;
+  
+  //added for cluster reference
+  ClusterRefProd FastTrackerClusterRefProd;
+
 
 };
 
