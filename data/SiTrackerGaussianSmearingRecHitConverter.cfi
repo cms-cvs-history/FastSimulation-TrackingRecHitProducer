@@ -78,10 +78,10 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     int32  BetaForward_BinNNew      =  0
 
     // TIB
-    double TIB1x = 0.00195
-    double TIB1y = 3.3775 // 11.7/sqrt(12.)
-    double TIB2x = 0.00191
-    double TIB2y = 3.3775 // 11.7/sqrt(12.)
+    double TIB1x = 0.00325
+    double TIB1y = 0.6755 // 11.7/sqrt(12.)
+    double TIB2x = 0.00323
+    double TIB2y = 0.6755 // 11.7/sqrt(12.)
     double TIB3x = 0.00325
     double TIB3y = 3.3775 // 11.7/sqrt(12.)
     double TIB4x = 0.00323
@@ -96,18 +96,18 @@ module siTrackerGaussianSmearingRecHits = SiTrackerGaussianSmearingRecHitConvert
     double TID3y = 3.4352 // 11.9/sqrt(12.)
 
     // TOB
-    double TOB1x = 0.00461
-    double TOB1y = 5.2836 // 2*9.1514/sqrt(12.)
-    double TOB2x = 0.00458
-    double TOB2y = 5.2836 // 2*9.1514/sqrt(12.)
-    double TOB3x = 0.00488
-    double TOB3y = 5.2836 // 2*9.1514/sqrt(12.)
-    double TOB4x = 0.00491
-    double TOB4y = 5.2836 // 2*9.1514/sqrt(12.)
-    double TOB5x = 0.00293
+    double TOB5x = 0.00461
     double TOB5y = 5.2836 // 2*9.1514/sqrt(12.)
-    double TOB6x = 0.00299
+    double TOB6x = 0.00458
     double TOB6y = 5.2836 // 2*9.1514/sqrt(12.)
+    double TOB1x = 0.00488
+    double TOB1y = 1.3209 // 2*9.1514/sqrt(12.)
+    double TOB2x = 0.00491
+    double TOB2y = 1.3209 // 2*9.1514/sqrt(12.)
+    double TOB3x = 0.00293
+    double TOB3y = 1.3209 // 2*9.1514/sqrt(12.)
+    double TOB4x = 0.00299
+    double TOB4y = 1.3209 // 2*9.1514/sqrt(12.)
 
     // TEC
     double TEC1x = 0.00262
