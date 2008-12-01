@@ -99,6 +99,11 @@ SiClusterTranslator::produce(edm::Event& e, const edm::EventSetup& es)
   std::auto_ptr<MixCollection<PSimHit> > allTrackerHits(new MixCollection<PSimHit>(cf_simhitvec));
   int counter =0;
   
+  //Clearing vector to hopefully make it run faster.
+  theNewSimHitList.clear();
+  thePixelDigiLinkVector.clear();
+  theStripDigiLinkVector.clear();
+
   for(MixCollection<PSimHit>::iterator it = allTrackerHits->begin(); it!= allTrackerHits->end();it++){
     counter++;
     theNewSimHitList.push_back(std::make_pair((*it), counter));
