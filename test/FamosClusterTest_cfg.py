@@ -21,12 +21,23 @@ process.load("RecoTracker.Configuration.RecoTracker_cff")
 process.load("FastSimulation.TrackingRecHitProducer.FastPixelCPE_cfi")
 process.load("FastSimulation.TrackingRecHitProducer.FastStripCPE_cfi")
 
+#First Step
+process.load("RecoTracker.IterativeTracking.FirstStep_cff")
+process.newClusters.pixelClusters = cms.InputTag('siClusterTranslator')
+process.newClusters.stripClusters = cms.InputTag('siClusterTranslator')
+process.newMeasurementTracker.StripCPE = cms.string('FastStripCPE')
+process.newMeasurementTracker.PixelCPE = cms.string('FastPixelCPE')
+
+
 #Second Step
 process.load("RecoTracker.IterativeTracking.SecStep_cff")
 process.secPixelRecHits.CPE = cms.string('FastPixelCPE')
 process.secStripRecHits.StripCPE = cms.string('FastStripCPE')
 process.secMeasurementTracker.StripCPE = cms.string('FastStripCPE')
 process.secMeasurementTracker.PixelCPE = cms.string('FastPixelCPE')
+#process.secClusters.pixelClusters = cms.InputTag('siClusterTranslator')
+#process.secClusters.stripClusters = cms.InputTag('siClusterTranslator')
+
 
 #Third Step
 process.load("RecoTracker.IterativeTracking.ThStep_cff")
@@ -75,9 +86,6 @@ process.MeasurementTracker.stripClusterProducer = cms.string('siClusterTranslato
 process.MeasurementTracker.pixelClusterProducer = cms.string('siClusterTranslator')
 process.MeasurementTracker.StripCPE = cms.string('FastStripCPE')
 process.MeasurementTracker.PixelCPE = cms.string('FastPixelCPE')
-process.load("RecoTracker.IterativeTracking.SecStep_cff")
-process.secClusters.pixelClusters = cms.InputTag('siClusterTranslator')
-process.secClusters.stripClusters = cms.InputTag('siClusterTranslator')
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
@@ -100,7 +108,7 @@ process.source = cms.Source("PoolSource",
                             debugFlag = cms.untracked.bool(True),
                             debugVebosity = cms.untracked.uint32(10),
                             fileNames = cms.untracked.vstring(
-    'file:Your_Fast_Sim_Input_File'
+    'Your FastSim Input File'
     )
                             )
 
@@ -120,14 +128,13 @@ process.Output = cms.OutputModule("PoolOutputModule",
                                   outputCommands = cms.untracked.vstring('drop *',
                                                                          'keep *_*_*_FamosClusterTest',
                                                                          ),
-                                  fileName = cms.untracked.string('Your_Output_File')
+                                  fileName = cms.untracked.string('Your Output File')
                                   )
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.destinations = ['detailedInfoFullTk.txt']
+#process.MessageLogger.destinations = ['detailedInfoFullTk.txt']
 process.MessageLogger.cerr.FwkReport.reportEvery = 100
-
-process.Path = cms.Path(process.siClusterTranslator*process.siPixelRecHits*process.siStripMatchedRecHits*process.ckftracks*process.FirstSecondTrackMerging*process.FirstSecondThirdTrackMerging)
+process.Path = cms.Path(process.siClusterTranslator*process.siPixelRecHits*process.siStripMatchedRecHits*process.ckftracks*process.FirstSecondThirdTrackMerging)
 process.o = cms.EndPath(process.Output)
 process.VolumeBasedMagneticFieldESProducer.useParametrizedTrackerField = True
 #process.FamosRecHitAnalysis.UseCMSSWPixelParametrization = False
