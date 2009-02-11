@@ -17,11 +17,16 @@
 <use name=clhep>
 <use name=rootcintex>
 <use name=rootgraphics>
-
+ 	
 <library file=FamosRecHitAnalysis.cc name=FamosRecHitAnalysis> 	 
   <use name=FWCore/Framework> 
   <flags EDM_PLUGIN=1> 	 
-</library> 	 
+</library>
+
+<library file=GSRecHitValidation.cc name=GSRecHitValidation> 	 
+  <use name=FWCore/Framework> 
+  <flags EDM_PLUGIN=1> 	 
+</library> 
 	  	 
 <library file=SiPixelRecHitsInputDistributionsMaker.cc name=SiPixelRecHitsInputDistributionsMaker>
   <use name=FWCore/Framework>
