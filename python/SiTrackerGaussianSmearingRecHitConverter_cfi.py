@@ -8,10 +8,10 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
              
     HitFindingProbability_TEC3 = cms.double(1.0),
     HitFindingProbability_TEC4 = cms.double(1.0),
-    TIB1y = cms.double(3.3775), ## 11.7/sqrt(12.)
+    TIB1y = cms.double(0.6755),
 
     # TIB
-    TIB1x = cms.double(0.00195),
+    TIB1x = cms.double(0.00325),
     # matching of 1dim hits in double-sided modules
     # creating 2dim hits
     doRecHitMatching = cms.bool(True),
@@ -29,8 +29,7 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
     HitFindingProbability_TID2 = cms.double(1.0),
     AlphaBarrel_BinMin = cms.double(-0.2),
     PixelForwardResolutionFile = cms.string('FastSimulation/TrackingRecHitProducer/data/PixelForwardResolution.root'),
-    TOB4x = cms.double(0.00491),
-    TIB2y = cms.double(3.3775), ## 11.7/sqrt(12.)
+    TIB2y = cms.double(0.6755), ## 11.7/sqrt(12.)
 
     TID2x = cms.double(0.00354),
     TID2y = cms.double(3.6662), ## 12.7/sqrt(12.)
@@ -52,19 +51,25 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
 
     TEC4x = cms.double(0.00346),
     AlphaBarrel_BinWidth = cms.double(0.1),
-    TOB1y = cms.double(5.2836), ## 2*9.1514/sqrt(12.)
 
     # TOB
-    TOB1x = cms.double(0.00461),
     AlphaForward_BinN = cms.int32(0),
     AlphaForward_BinMinNew = cms.double(0.0),
     # Pixel
     PixelMultiplicityFile = cms.string('FastSimulation/TrackingRecHitProducer/data/PixelData.root'),
     HitFindingProbability_TOB2 = cms.double(1.0),
     AlphaForward_BinMin = cms.double(0.0),
-    TOB6x = cms.double(0.00299),
+    TOB6x = cms.double(0.00458),
     TOB6y = cms.double(5.2836), ## 2*9.1514/sqrt(12.)
-
+    TOB1x = cms.double(0.00488),
+    TOB1y = cms.double(1.3209), ## 2*9.1514/sqrt(12.)
+    TOB2x = cms.double(0.00491),
+    TOB2y = cms.double(1.3209), ## 2*9.1514/sqrt(12.)
+    TOB3x = cms.double(0.00293),
+    TOB3y = cms.double(1.3209), ## 2*9.1514/sqrt(12.)
+    TOB4x = cms.double(0.00299),
+    TOB4y = cms.double(1.3209), ## 2*9.1514/sqrt(12.)
+    
     TEC3x = cms.double(0.00391),
     TEC3y = cms.double(3.4352), ## 11.9/sqrt(12.)
 
@@ -72,15 +77,12 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
     BetaBarrelMultiplicity = cms.int32(6),
     AlphaBarrelMultiplicity = cms.int32(4),
     TIB4x = cms.double(0.00323),
-    TOB2y = cms.double(5.2836), ## 2*9.1514/sqrt(12.)
 
     BetaForward_BinN = cms.int32(0),
     TEC6y = cms.double(6.8704), ## 2*11.9/sqrt(12.)
 
     TEC6x = cms.double(0.00508),
-    TOB3y = cms.double(5.2836), ## 2*9.1514/sqrt(12.)
 
-    TOB3x = cms.double(0.00488),
     TID1y = cms.double(3.6662), ## 12.7/sqrt(12.)
 
     # TID
@@ -105,7 +107,7 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
     TEC5y = cms.double(7.1014), ## 2*12.3/sqrt(12.)
 
     BetaForwardMultiplicityNew = cms.int32(3),
-    TOB5x = cms.double(0.00293),
+    TOB5x = cms.double(0.00461),
     BetaBarrel_BinNNew = cms.int32(7),
     AlphaBarrel_BinNNew = cms.int32(4),
     AlphaForwardMultiplicityNew = cms.int32(3),
@@ -146,7 +148,6 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
 
     PixelForwardResolutionFile40T = cms.string('FastSimulation/TrackingRecHitProducer/data/PixelForwardResolution40T.root'),
     PixelForwardResolutionFile38T = cms.string('FastSimulation/TrackingRecHitProducer/data/PixelForwardResolution38T.root'),
-    TOB2x = cms.double(0.00458),
     TIB4y = cms.double(3.3775), ## 11.7/sqrt(12.)
 
     # Needed to compute Pixel Errors
@@ -155,9 +156,8 @@ siTrackerGaussianSmearingRecHits = cms.EDFilter("SiTrackerGaussianSmearingRecHit
     # Hit Finding Probabilities
     HitFindingProbability_PXB = cms.double(1.0),
     AlphaBarrel_BinMinNew = cms.double(-0.2),
-    TIB2x = cms.double(0.00191),
+    TIB2x = cms.double(0.00323),
     HitFindingProbability_TOB4 = cms.double(1.0),
-    TOB4y = cms.double(5.2836), ## 2*9.1514/sqrt(12.)
 
     HitFindingProbability_PXF = cms.double(1.0)
 )

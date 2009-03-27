@@ -11,6 +11,8 @@
 //#include "DataFormats/TrackerRecHit2D/interface/SiTrackerGSRecHit2DCollection.h"
 #include "RecoLocalTracker/SiPixelRecHits/interface/PixelErrorParametrization.h"
 
+#include "DataFormats/SiPixelDetId/interface/PXBDetId.h"
+
 // Geometry
 //#include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/CommonDetUnit/interface/GeomDetUnit.h"
@@ -382,6 +384,28 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
 	    << std::endl;	
 #endif
   
+  unsigned int subdet   = DetId(simHit.detUnitId()).subdetId();
+  unsigned int theLayer = 0;  
+  if(subdet == 1) {
+    unsigned int detid    = DetId(simHit.detUnitId()).rawId();
+    PXBDetId module(detid);
+    theLayer = module.layer();
+//     if(theLayer == 5 || theLayer == 6)
+//       betaMultiplicity /= 4;
+//     else if (theLayer > 6)
+//       betaMultiplicity /= 8;
+    if(theLayer > 4)
+      betaMultiplicity = 1;
+
+#ifdef FAMOS_DEBUG
+    std::cout << "SimHit in pixelBarrel layer " << theLayer << std::endl;
+#endif
+  }
+
+//   if(betaMultiplicity == 0)
+//     betaMultiplicity = 1;
+
+
   // Compute pixel errors
   std::pair<float,float> theErrors = pixelError->getError( thePixelPart ,
 							  (int)alphaMultiplicity , (int)betaMultiplicity ,
@@ -390,6 +414,22 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
   // define private mebers --> Errors
   theErrorX = theErrors.first;  // PixelErrorParametrization returns sigma, not sigma^2
   theErrorY = theErrors.second; // PixelErrorParametrization returns sigma, not sigma^2
+
+  // For strixels, errors are equal to length/sqrt(12)
+  if(subdet == 1)
+  {
+    if(theLayer == 5 || theLayer == 6)
+      if(hasBigPixelInY)
+        theErrorY = 0.03464;
+      else
+        theErrorY = 0.01732;
+    if(theLayer == 7 || theLayer == 8)
+      if(hasBigPixelInY)
+        theErrorY = 0.06928;
+      else
+        theErrorY = 0.03464;
+  }
+
   theErrorZ = 1e-8; // 1 um means zero
   theError = LocalError( theErrorX*theErrorX, 0., theErrorY*theErrorY);
   // Local Error is 2D: (xx,xy,yy), square of sigma in first an third position 
@@ -444,6 +484,13 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
     // Smear the hit Position
     thePositionX = theAlphaHistos[alphaHistN]->generate();
     thePositionY = theBetaHistos[betaHistN]->generate();
+    if(subdet == 1) {
+      if(theLayer == 5 || theLayer == 6)
+        thePositionY *= 4;
+      else if (theLayer == 7 || theLayer == 8)
+        thePositionY *= 8;
+    }
+
     //  thePositionX = theAlphaHistos[alphaHistN]->getHisto()->GetRandom();
     //  thePositionY = theBetaHistos[betaHistN]->getHisto()->GetRandom();
     thePositionZ = 0.0; // set at the centre of the active area

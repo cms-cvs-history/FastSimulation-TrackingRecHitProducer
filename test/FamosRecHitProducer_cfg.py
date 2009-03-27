@@ -14,10 +14,13 @@ process.load("FastSimulation.Configuration.FamosSequences_cff")
 process.load("Configuration.StandardSequences.MagneticField_40T_cff")
 # process.load("Configuration.StandardSequences.MagneticField_38T_cff")
 
+# Replace the standard geometry include
+process.load("SLHCUpgradeSimulations.Geometry.strawmana_cmsIdealGeometryXML_cff")
+
 # process.load("FastSimulation.TrackingRecHitProducer.test.FamosRecHitAnalysis_cfi")
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(50000)
+    input = cms.untracked.int32(500)
 #    input = cms.untracked.int32(10)
 )
 process.source = cms.Source("FlatRandomEGunSource",
@@ -44,7 +47,7 @@ process.Output = cms.OutputModule("PoolOutputModule",
 )
 
 # process.Path = cms.Path(process.famosWithTrackerHits*process.trackerGSRecHitTranslator*process.FamosRecHitAnalysis)
-process.Path = cms.Path(process.famosWithTrackerHits*process.trackerGSRecHitTranslator)
+process.Path = cms.Path(process.famosWithTrackerHits*process.trackerGSRecHitTranslator*process.Output)
 process.famosSimHits.SimulateCalorimetry = False
 process.famosSimHits.SimulateTracking = True
 process.siTrackerGaussianSmearingRecHits.UseCMSSWPixelParametrization = True
