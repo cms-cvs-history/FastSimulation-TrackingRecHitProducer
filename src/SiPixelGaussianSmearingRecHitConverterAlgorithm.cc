@@ -216,18 +216,18 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
   //
   bool hasBigPixelInX = false;
   bool hasBigPixelInY = false;
+  
+  // Get the topology of the pixel module
+  const PixelTopology* theSpecificTopology = &(detUnit->specificTopology());
+  RectangularPixelTopology rectPixelTopology(theSpecificTopology->nrows(), 
+                                             theSpecificTopology->ncolumns(), 
+                                             theSpecificTopology->pitch().first, 
+                                             theSpecificTopology->pitch().second);
 
   if(useCMSSWPixelParameterization) {
     // If the sim track crosses a region in which there are big pixels,
     // then we set to true the variables above
 
-    // Get the topology of the pixel module
-    const PixelTopology* theSpecificTopology = &(detUnit->specificTopology());
-    RectangularPixelTopology rectPixelTopology(theSpecificTopology->nrows(), 
-                                               theSpecificTopology->ncolumns(), 
-                                               theSpecificTopology->pitch().first, 
-                                               theSpecificTopology->pitch().second);
-    
     // Get the rows and columns of entry and exit points
     // FIXME - these are not guaranteed to be the same as the cluster limits (as they should be)
     const int firstPixelInX = int(rectPixelTopology.pixel(simHit.entryPoint()).first);
@@ -390,12 +390,13 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
     unsigned int detid    = DetId(simHit.detUnitId()).rawId();
     PXBDetId module(detid);
     theLayer = module.layer();
+    // BetaMultiplicity is not used anymore for the strixel layers
 //     if(theLayer == 5 || theLayer == 6)
 //       betaMultiplicity /= 4;
 //     else if (theLayer > 6)
 //       betaMultiplicity /= 8;
-    if(theLayer > 4)
-      betaMultiplicity = 1;
+//     if(theLayer > 4)
+//       betaMultiplicity = 1;
 
 #ifdef FAMOS_DEBUG
     std::cout << "SimHit in pixelBarrel layer " << theLayer << std::endl;
@@ -423,12 +424,14 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
         theErrorY = 0.03464;
       else
         theErrorY = 0.01732;
-    if(theLayer == 7 || theLayer == 8)
-      if(hasBigPixelInY)
-        theErrorY = 0.06928;
-      else
-        theErrorY = 0.03464;
+      // There are no layers 7 and 8 anymore
+//     if(theLayer == 7 || theLayer == 8)
+//       if(hasBigPixelInY)
+//         theErrorY = 0.06928;
+//       else
+//         theErrorY = 0.03464;
   }
+
 
   theErrorZ = 1e-8; // 1 um means zero
   theError = LocalError( theErrorX*theErrorX, 0., theErrorY*theErrorY);
@@ -484,12 +487,12 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
     // Smear the hit Position
     thePositionX = theAlphaHistos[alphaHistN]->generate();
     thePositionY = theBetaHistos[betaHistN]->generate();
-    if(subdet == 1) {
-      if(theLayer == 5 || theLayer == 6)
-        thePositionY *= 4;
-      else if (theLayer == 7 || theLayer == 8)
-        thePositionY *= 8;
-    }
+//     if(subdet == 1) {
+//       if(theLayer == 5 || theLayer == 6)
+//         thePositionY *= 4;
+//       else if (theLayer == 7 || theLayer == 8)
+//         thePositionY *= 8;
+//     }
 
     //  thePositionX = theAlphaHistos[alphaHistN]->getHisto()->GetRandom();
     //  thePositionY = theBetaHistos[betaHistN]->getHisto()->GetRandom();
@@ -518,6 +521,15 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
   } while(fabs(thePosition.x()) > boundX  || fabs(thePosition.y()) > boundY);
   
 
+  std::pair<float,float> hitPixels = rectPixelTopology.pixel(simHit.localPosition());
+  
+  float pixelLPY = rectPixelTopology.localY(hitPixels.second);
+  
+  if(subdet == 1)
+    if(theLayer > 4)
+      thePosition = Local3DPoint(thePosition.x() ,
+                                 pixelLPY ,
+                                 thePosition.z() );
   
   // define private mebers --> Multiplicities
   thePixelMultiplicityAlpha = alphaMultiplicity;
