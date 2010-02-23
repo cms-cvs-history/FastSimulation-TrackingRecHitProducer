@@ -135,12 +135,12 @@ SiPixelGaussianSmearingRecHitConverterAlgorithm::SiPixelGaussianSmearingRecHitCo
 				 + alphaMultiplicity);    //
       theAlphaHistos[alphaHistN] = new SimpleHistogramGenerator(
 	(TH1F*) thePixelResolutionFile->Get(  Form( "h%u" , alphaHistN ) ),
-        random);
+	random);
       // Fill also big pixels if new parametrization is used. Their code is 10000 + histogram number
       if(useCMSSWPixelParameterization) {
-          theAlphaHistos[alphaHistN+10000] = new SimpleHistogramGenerator(
-	    (TH1F*) thePixelResolutionFile->Get(  Form( "h%ub" , alphaHistN ) ),
-	    random);
+        theAlphaHistos[alphaHistN+10000] = new SimpleHistogramGenerator(
+          (TH1F*) thePixelResolutionFile->Get(  Form( "h%ub" , alphaHistN ) ),
+          random);
       }
     }
   }
@@ -162,14 +162,13 @@ SiPixelGaussianSmearingRecHitConverterAlgorithm::SiPixelGaussianSmearingRecHitCo
 				:
 				1100 + betaMultiplicity);    //
       theBetaHistos[betaHistN] = new SimpleHistogramGenerator(
-        (TH1F*) thePixelResolutionFile->Get(  Form( "h%u" , betaHistN  ) ),
+	(TH1F*) thePixelResolutionFile->Get(  Form( "h%u" , betaHistN  ) ),
 	random);
       // Fill also big pixels if new parametrization is used. Their code is 10000 + histogram number
-      if(useCMSSWPixelParameterization) {
-	theBetaHistos[betaHistN+10000] = new SimpleHistogramGenerator(
+      if(useCMSSWPixelParameterization)
+        theBetaHistos[betaHistN+10000] = new SimpleHistogramGenerator(
           (TH1F*) thePixelResolutionFile->Get(  Form( "h%ub" , betaHistN  ) ),
-	  random);
-      }
+          random);
     }
   }
 }
@@ -181,6 +180,7 @@ SiPixelGaussianSmearingRecHitConverterAlgorithm::~SiPixelGaussianSmearingRecHitC
   delete pixelError;
 
   std::map<unsigned,const SimpleHistogramGenerator*>::const_iterator it;
+
   for ( it=theAlphaHistos.begin(); it!=theAlphaHistos.end(); ++it ) 
     delete it->second;
 
@@ -224,7 +224,11 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
     RectangularPixelTopology rectPixelTopology(theSpecificTopology->nrows(), 
                                                theSpecificTopology->ncolumns(), 
                                                theSpecificTopology->pitch().first, 
-                                               theSpecificTopology->pitch().second);
+                                               theSpecificTopology->pitch().second,
+                                               theSpecificTopology->rocsX(),
+                                               theSpecificTopology->rocsY(),
+                                               theSpecificTopology->rowsperroc(),
+                                               theSpecificTopology->colsperroc());
     
     // Get the rows and columns of entry and exit points
     // FIXME - these are not guaranteed to be the same as the cluster limits (as they should be)
@@ -444,6 +448,8 @@ void SiPixelGaussianSmearingRecHitConverterAlgorithm::smearHit(
     // Smear the hit Position
     thePositionX = theAlphaHistos[alphaHistN]->generate();
     thePositionY = theBetaHistos[betaHistN]->generate();
+    //  thePositionX = theAlphaHistos[alphaHistN]->getHisto()->GetRandom();
+    //  thePositionY = theBetaHistos[betaHistN]->getHisto()->GetRandom();
     thePositionZ = 0.0; // set at the centre of the active area
     thePosition = 
       Local3DPoint(simHit.localPosition().x() + thePositionX , 
