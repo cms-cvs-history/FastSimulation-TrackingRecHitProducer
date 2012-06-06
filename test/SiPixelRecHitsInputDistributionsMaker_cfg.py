@@ -78,8 +78,9 @@ process.Timing = cms.Service("Timing")
 process.SimpleMemoryCheck = cms.Service("SimpleMemoryCheck")
 
 process.simhits = cms.Sequence(process.g4SimHits)
+process.digis = cms.Sequence(process.trDigi)
 process.rechits = cms.Sequence(process.trackerlocalreco*process.pixRecHitsDistributionsMaker)
-process.p1 = cms.Path(process.simhits*process.mix*process.rechits)
+process.p1 = cms.Path(process.simhits*process.mix*process.digis*process.rechits)
 process.outpath = cms.EndPath(process.USER)
 process.g4SimHits.Generator.HepMCProductLabel = 'source'
 

@@ -230,6 +230,7 @@ SiClusterTranslator::produce(edm::Event& e, const edm::EventSetup& es)
       stripDetSet.id = det.rawId();
       stripDetSet.data.push_back(StripDigiSimLink(strip_num,
 						  aCluster->simtrackId(),
+						  sim_counter,
 						  EncodedEventId(aCluster->eeId()),
 						  1.0));
       theStripDigiLinkVector.push_back(stripDetSet);
